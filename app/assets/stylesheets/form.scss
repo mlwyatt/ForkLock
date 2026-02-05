@@ -1,0 +1,110 @@
+// Form components
+
+// Buttons
+
+button.button, a.button, input.button {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.button.is-not-outlined {
+  border: none;
+  background-color: transparent;
+  color: hsl(229deg, 53%, 53%);
+  text-decoration: underline;
+
+  &:hover {
+    background-color: transparent;
+    color: hsl(229deg, 63%, 63%);
+  }
+}
+
+.button.is-link:focus,
+.button.is-link.is-focused {
+  color: rgba(72, 95, 199, 25%);
+}
+
+.button.is-link.is-outlined:hover {
+  background-color: transparent;
+  color: hsl(229deg, 53%, 53%);
+}
+
+.button.is-static {
+  background-color: $grey-light;
+  border-width: 0;
+  color: hsl(0deg, 0%, 34%);
+}
+
+.field.has-addons button.button:not(.is-static) {
+  border-color: $grey-light;
+  border-width: 2px;
+}
+
+form.button-to-inline {
+  display: inline-block;
+
+  button {
+    display: inline-block;
+  }
+}
+
+.label span.is-optional {
+  color: $grey;
+  font-style: italic;
+  font-weight: 200;
+}
+
+.field .is-left-aligned label {
+  margin-bottom: 0.5em;
+  text-align: left;
+}
+
+.field.has-addons .control:last-child:not(:only-child) .button,
+.field.has-addons .control:last-child:not(:only-child) .input,
+.field.has-addons .control:last-child:not(:only-child) .select select {
+  border-left-width: 1px;
+}
+
+input.input, .select select, .textarea {
+  border-radius: 2px;
+  border: 1px solid $grey-light;
+  background-color: white;
+  transition: all ease-in 150ms;
+
+  &:hover {
+    border-color: $grey;
+  }
+
+  &:active, &:focus {
+    border-color: $primary;
+    box-shadow: none;
+  }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+p.help {
+  margin-left: 0.75rem;
+}
+
+.upcase-me {
+  text-transform: uppercase;
+}
+
+.money-calculator {
+  > .column {
+    padding: 0.25rem;
+  }
+}
+
+[readonly].input, [readonly].textarea {
+  background-color: hsl(0deg, 0%, 90%);
+}

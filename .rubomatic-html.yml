@@ -1,0 +1,16 @@
+AllCops:
+  Enabled: true
+
+Layout/LineLength:
+  Enabled: true
+
+Layout/MultipleLineBreaks:
+  Enabled: true
+
+Layout/TrailingWhitespace:
+  Enabled: true
+
+Style/PartialInstanceVariable:
+  Enabled: true
+  AllowedIdentifiers:
+    - '@window'

@@ -1,0 +1,195 @@
+#all_flash_messages {
+  position: fixed;
+  top: $nav-height;
+  width: 100%;
+  z-index: 1000;
+}
+
+#flash_messages, #paged_flash_messages, .flash-messages {
+  width: 100%;
+  z-index: 10;
+
+  .notification {
+    text-align: center;
+    font-size: 1.2rem;
+    border-radius: 0;
+  }
+}
+
+.prev-page, .next-page {
+  background-color: rgba(10, 10, 10, 0.2);
+  border: none;
+  border-radius: 9999px;
+  color: hsl(0deg, 0%, 100%);
+
+  @extend .is-rounded;
+  @extend .is-small;
+}
+
+
+.notification {
+  > .prev-page {
+    left: 2rem;
+    position: absolute;
+  }
+
+  > .next-page {
+    right: 2rem;
+    position: absolute;
+  }
+}
+
+
+@keyframes fade-out-green {
+  0%, 75% {
+    background: darken($green, 15%);
+  }
+  to {
+    background: lighten($green, 10%);
+  }
+}
+
+@keyframes fade-out-yellow {
+  0%, 75% {
+    background: darken($yellow, 15%);
+  }
+  to {
+    background: $yellow;
+  }
+}
+
+@keyframes fade-out-red {
+  0%, 75% {
+    background: darken($red, 15%);
+  }
+  to {
+    background: lighten($red, 10%);
+  }
+}
+
+.fade-out-green {
+  animation: fade-out-green 5s;
+  background: lighten($green, 10%);
+}
+
+.fade-out-yellow {
+  animation: fade-out-yellow 5s;
+  background: $yellow;
+}
+
+.fade-out-red {
+  animation: fade-out-red 5s;
+  background: lighten($red, 10%);
+}
+
+.faded-out-green {
+  background: lighten($green, 10%);
+}
+
+.faded-out-yellow {
+  background: $yellow;
+}
+
+.faded-out-red {
+  background: lighten($red, 10%);
+}
+
+@keyframes adding-swipe-left {
+  0% {
+    left: 0;
+    display: initial;
+  }
+  49% {
+    display: initial;
+  }
+  50% {
+    display: none;
+    left: -75vw;
+  }
+  to {
+    display: none;
+    left: -100vw;
+  }
+}
+
+@keyframes adding-swipe-right {
+  0% {
+    right: 0;
+    display: initial;
+  }
+  49% {
+    display: initial;
+  }
+  50% {
+    display: none;
+    right: -75vw;
+  }
+  to {
+    display: none;
+    right: -100vw;
+  }
+}
+
+@keyframes removing-swipe-left {
+  0% {
+    left: -100vw;
+    display: none;
+  }
+  50% {
+    display: none;
+    left: -75vw;
+  }
+  51% {
+    display: initial;
+  }
+  to {
+    display: initial;
+    left: 0;
+  }
+}
+
+@keyframes removing-swipe-right {
+  0% {
+    right: -100vw;
+    display: none;
+  }
+  50% {
+    display: none;
+    right: -75vw;
+  }
+  51% {
+    display: initial;
+  }
+  to {
+    display: initial;
+    right: 0;
+  }
+}
+
+.adding-swipe-left {
+  animation: adding-swipe-left 0.5s;
+  display: none;
+  left: -200vw;
+  position: relative;
+}
+
+.adding-swipe-right {
+  animation: adding-swipe-right 0.5s;
+  display: none;
+  right: -200vw;
+  position: relative;
+}
+
+.removing-swipe-left {
+  animation: removing-swipe-left 0.5s;
+  display: initial;
+  left: 0;
+  position: relative;
+}
+
+.removing-swipe-right {
+  animation: removing-swipe-right 0.5s;
+  display: initial;
+  right: 0;
+  position: relative;
+}

@@ -1,0 +1,74 @@
+// overwrite Bulma's default CSS for .block, .box, .button, .content, .delete, .icon, .image, .notification,
+// .progress-bar, .table, .tag, and .title
+
+a {
+  text-decoration: underline;
+
+  &.button, &.navbar-item, &.navbar-link {
+    text-decoration: none;
+  }
+}
+
+.box {
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .25);
+
+  &.is-lifted {
+    background-color: #fffdfa;
+  }
+}
+
+.table {
+  tr.is-inactive td {
+    color: $grey-light;
+  }
+
+  tr td a.is-link {
+    font-weight: 700;
+    text-decoration: underline;
+    text-transform: uppercase;
+  }
+
+  caption {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+}
+
+.bold-text {
+  font-weight: bold !important;
+}
+
+
+.button.is-link.is-transparent {
+  background-color: transparent;
+}
+
+
+.button.is-floating {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  border-radius: 20px;
+  box-shadow: 1px 1px 0 1px rgba($black, 0.05);
+  z-index: 3;
+}
+
+.is-colored {
+  @each $name, $pair in $notification-colors {
+    $color: nth($pair, 1);
+    $color-invert: nth($pair, 2);
+    &.is-#{$name} {
+      background-color: $color;
+      color: $color-invert;
+      // If light and dark colors are provided
+      @if length($pair) >= 4 {
+        $color-light: nth($pair, 3);
+        $color-dark: nth($pair, 4);
+        &.is-light {
+          background-color: $color-light;
+          color: $color-dark;
+        }
+      }
+    }
+  }
+}

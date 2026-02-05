@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      <%= yield(:title) %>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <%= stylesheet_link_tag "actiontext", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <div
+      id="global_controller_element"
+      data-controller="global dynamic-header"
+    >
+      <%= turbo_frame_tag(:global_edit_modal) %>
+      <%= render({ partial: 'layouts/partials/navbar' }) %>
+      <%= render({ partial: 'layouts/partials/loading_dialog' }) %>
+      <%= render({ partial: 'layouts/partials/all_flash_message_container' }) %>
+      <%= render({ partial: 'layouts/partials/confirm_message_container' }) %>
+      <main class="container is-fluid" data-dynamic-header-target="pageContainer">
+        <%
+          title = yield(:title)
+          subtitle = nil
+        %>
+        <section class="section page-title" data-dynamic-header-target="title" data-title="<%= title.presence %>">
+          <div>
+            <h1>
+              <%= title %>
+            </h1>
+            <% if subtitle.present? %>
+              <p class="subtitle">
+                <%= subtitle %>
+              </p>
+            <% end %>
+          </div>
+        </section>
+        <section class="section">
+          <%= yield %>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

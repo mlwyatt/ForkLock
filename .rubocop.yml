@@ -1,0 +1,31 @@
+inherit_mode:
+  merge:
+    - Exclude
+
+inherit_gem:
+  rubocop-rubomatic-rails: config/rubocop.yml
+
+AllCops:
+  TargetRailsVersion: 7.1
+
+RSpec/NestedGroups:
+  Max: 5
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: true
+  AllowSubject: true
+  Max: 10
+
+Style/MethodCallWithArgsParentheses:
+  inherit_mode:
+    merge:
+      - AllowedMethods
+  AllowedMethods:
+    - has_many
+    - has_one
+    - belongs_to
+    - delegate
+    - accepts_nested_attributes_for

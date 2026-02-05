@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "noUncheckedIndexedAccess": true,
+    "strictFunctionTypes": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowSyntheticDefaultImports": true,
+    "declarationDir": "./app/javascript/dist",
+    "declaration": true,
+    "allowUnreachableCode": true,
+    "noImplicitOverride": false,
+    "noFallthroughCasesInSwitch": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2022"
+    ],
+    "noEmitOnError": true,
+    "strict": true,
+    "target": "es6",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@controllers/*": [
+        "app/javascript/controllers/*"
+      ],
+      "@scripts/*": [
+        "app/javascript/scripts/*"
+      ],
+      "@common/*": [
+        "app/javascript/scripts/common/*"
+      ],
+      "*": [
+        "node_modules"
+      ]
+    }
+  },
+  "include": [
+    "./app/javascript/**/*.ts"
+  ]
+}

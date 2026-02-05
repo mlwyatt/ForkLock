@@ -1,0 +1,233 @@
+// overwrite Bulma's default CSS for breadcrumbs, cards, dropdowns, menus, messages, modals, navbars, pagination,
+// panels and tabs
+
+.turbo-progress-bar {
+  top: $nav-height;
+}
+
+.form-section {
+  padding: 12px 0;
+
+  &:first-of-type {
+    padding: 0 0 12px 0;
+  }
+
+  &:last-of-type {
+    padding: 12px 0 0 0;
+  }
+
+  .form-section-header {
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+}
+
+.section.is-condensed .form-section {
+  .columns:not(:last-child) {
+    margin-bottom: 0;
+  }
+
+  .label {
+    font-size: 0.9rem;
+  }
+
+  .label:not(:last-child), .field .is-left-aligned label {
+    margin-bottom: 0.05rem;
+  }
+}
+
+.column.is-full.like-table > .columns > .column {
+  padding: 0;
+}
+
+.is-grey {
+  background: $grey-lighter;
+}
+
+.is-slight-grey {
+  background: lighten($grey-lighter, 5%);
+}
+
+i.preferred-icon {
+  color: $yellow;
+}
+
+.is-scroll-panel {
+  height: 15em;
+  overflow-x: scroll;
+}
+
+.navbar .navbar-end form button {
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  padding: .5rem .75rem;
+  color: hsl(0deg, 0%, 29%);
+  cursor: pointer;
+  //line-height: 2;
+  margin: .53rem 0;
+
+  &:hover, &:focus {
+    color: hsl(229deg, 53%, 53%);
+  }
+}
+
+$outline-color: rgba(0, 0, 0, .34);
+
+// cards
+.card {
+  box-shadow: 0 0 0 1px $outline-color;
+  border: 0;
+
+  .card-header {
+    box-shadow: none;
+  }
+
+  &.card--flush {
+    box-shadow: none;
+    border: 1px solid transparent;
+  }
+
+  &.card--with-table {
+    border-radius: 0;
+
+    > .card-content {
+      padding: 0;
+    }
+  }
+}
+
+// tabs
+.tabs.is-boxed a {
+  border-radius: 0;
+}
+
+
+.tabs ul li a {
+  font-weight: 400;
+  font-size: 1.2rem;
+  //text-transform: uppercase;
+}
+
+.tab-content {
+  display: none;
+
+  &.is-active {
+    display: block;
+  }
+}
+
+.tabs ul li a {
+  text-decoration: none;
+}
+
+@media screen and (min-width: $desktop) {
+  .modal-content,
+  .modal-card {
+    margin: 0 auto;
+    max-height: calc(100vh - 40px);
+    max-width: calc(100vw - 40px);
+    width: auto;
+  }
+}
+
+[data-controller*="modal"].is-full .modal-card {
+  height: calc(100vh - 40px);
+  width: calc(100vw - 40px);
+
+  .modal-card-body {
+    max-height: 100%;
+    overflow-y: scroll;
+  }
+}
+
+
+.tooltip {
+  z-index: 2000;
+  position: fixed;
+  background: $grey-darker;
+  border-radius: 4px;
+  transition: transform 75ms;
+  transform: scale(0);
+  display: inline-flex;
+
+  &.tooltip--shown {
+    transform: scale(1);
+  }
+
+  span {
+    color: $white-ter;
+    padding: 4px;
+    font-size: 0.75rem;
+  }
+}
+
+$minModalHeight: 20vh;
+$maxModalHeight: 81vh;
+
+.modal-card-body {
+  min-width: 50vw;
+  min-height: $minModalHeight;
+  max-height: $maxModalHeight;
+  overflow: scroll;
+
+  .scrolling-target {
+    min-height: $minModalHeight;
+    max-height: $maxModalHeight;
+    overflow: scroll;
+  }
+}
+
+
+.modal-card-body, .modal-card {
+  &.modal-card-with-slim-select {
+    overflow: visible;
+  }
+}
+
+
+.nested.dropdown {
+  &:hover > .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu {
+    top: -15px;
+    margin-left: 100%;
+  }
+
+  .navbar-link:not(.is-arrowless)::after {
+    transform: rotate(-135deg);
+  }
+
+
+  .dropdown-content {
+    box-shadow: none;
+    background-color: hsl(0deg, 0%, 98%);
+  }
+}
+
+.modal-background {
+  background-color: rgba(10, 10, 10, 0.66);
+}
+
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  border: 4px solid $grey-lighter;
+  border-top-color: $primary;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,11 @@
+.material-icons {
+  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 36;
+
+  &.no-fill {
+    font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 36;
+  }
+
+  &.yellow {
+    color: $yellow;
+  }
+}

@@ -1,0 +1,69 @@
+# Development compose override
+# Command: docker compose up -d
+
+# prepend with x- for docker to ignore
+x-build: &build
+  # `build` and `image` to only build the image once
+  build:
+    context: .
+    target: base
+  image: "fork_lock:${FORK_LOCK_TAG:-1}"
+  volumes:
+    - .:/ForkLock
+    - node_modules:/${APP_PATH:-ForkLock}/node_modules
+    - bundle:/usr/local/bundle
+x-interactive: &interactive
+  # allow interactive connection
+  tty: true
+  stdin_open: true
+x-environment: &environment
+  RAILS_ENV: development
+  REDIS_HOST: redis
+  EDITOR: vim
+  FORK_LOCK_RAILS_PORT: ${FORK_LOCK_RAILS_PORT:-3000}
+x-shared: &shared
+  <<: [ *build, *interactive ]
+  environment: *environment
+
+services:
+  redis:
+    image: redis:7.0.9
+    ports:
+      - ${FORK_LOCK_REDIS_PORT:-6379}:6379
+    # https://github.com/dockerfile/redis#run-redis-server-with-persistent-data-directory-creates-dumprdb
+    volumes:
+      - redis:/data
+  web:
+    <<: *shared
+    command: rails s -p 3000 -b 0.0.0.0
+    ports:
+      - ${FORK_LOCK_RAILS_PORT:-3000}:3000
+  vscode:
+    <<: *shared
+    command: /bin/bash
+    build:
+      context: .
+      target: claude_helper
+    profiles:
+      - vscode
+    volumes:
+      - .:/ForkLock
+      - node_modules:/${APP_PATH:-ForkLock}/node_modules
+      - bundle:/usr/local/bundle
+      - ~/.config/gh:/root/.config/gh
+      - ~/.gitconfig:/root/.gitconfig:ro
+      - ~/.coderabbit:/root/.coderabbit
+  css:
+    <<: *shared
+    command: yarn build:css --watch
+    depends_on:
+      - web
+  js:
+    <<: *shared
+    command: yarn build:ts
+    depends_on:
+      - web
+volumes:
+  bundle:
+  node_modules:
+  redis:
