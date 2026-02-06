@@ -7,7 +7,7 @@ class Session < ApplicationRecord
   has_many :participants, dependent: :destroy
   has_many :votes, through: :participants
 
-  validates :code, presence: true, uniqueness: true, length: { is: 4 }
+  validates :code, presence: true, uniqueness: true, length: { is: 8 }
 
   scope :not_expired, -> { where('expires_at > ?', Time.current) }
 
@@ -27,9 +27,9 @@ class Session < ApplicationRecord
 
     # @return [void]
     def generate_code
-      chars = ('A'..'Z').to_a - %w[I O L]
+      chars = (('A'..'Z').to_a - %w[I O L]) + ('1'..'9').to_a
       loop do
-        self.code = Array.new(4) { chars.sample }.join
+        self.code = Array.new(8) { chars.sample }.join
         break unless Session.exists?(code: code)
       end
     end
