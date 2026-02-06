@@ -1,0 +1,10 @@
+<%= turbo_frame_tag('swipe_interface') do %>
+  <%= render({
+    partial: 'sessions/partials/swipe_interface',
+    locals: {
+      voting_session: @voting_session,
+      current_restaurant: @current_restaurant,
+      progress: @progress
+    }
+  }) %>
+<% end %>

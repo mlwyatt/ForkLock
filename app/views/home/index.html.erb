@@ -1,0 +1,31 @@
+<section class="hero is-fullheight is-primary">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 mb-2">
+        <i class="fas fa-utensils"></i> ForkLock
+      </h1>
+      <p class="subtitle is-4 mb-6">Swipe together. Eat together.</p>
+
+      <div class="buttons is-centered is-flex-direction-column">
+        <%= form_with(url: sessions_path, method: :post, local: true) do |form| %>
+          <div class="field mb-4" style="max-width: 300px; margin: 0 auto;">
+            <%= form.text_field(:name,
+              class: 'input is-medium has-text-centered',
+              placeholder: 'Your name',
+              maxlength: 20,
+              value: ''
+            ) %>
+          </div>
+          <%= form.submit('Start New Session',
+            class: 'button is-large is-warning is-rounded'
+          ) %>
+        <% end %>
+
+        <%= link_to(join_path, class: 'button is-large is-light is-rounded mt-4') do %>
+          <span class="icon"><i class="fas fa-users"></i></span>
+          <span>Join Session</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

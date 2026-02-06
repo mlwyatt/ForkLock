@@ -1,0 +1,16 @@
+<% if flash.any? %>
+  <div class="flash-messages">
+    <% flash.each do |type, message| %>
+      <% bulma_class = case type.to_s
+                       when 'notice', 'success' then 'is-success'
+                       when 'alert', 'error' then 'is-danger'
+                       when 'warning' then 'is-warning'
+                       else 'is-info'
+                       end %>
+      <div class="notification <%= bulma_class %> flash-message">
+        <button class="delete" data-action="click->flash#dismiss"></button>
+        <%= message %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+<%= turbo_stream.update('swipe_interface') do %>
+  <%=
+    render({
+      partial: 'sessions/partials/swipe_interface',
+      locals: {
+        voting_session: current_session,
+        current_restaurant: @next_restaurant,
+        progress: @progress_data
+      }
+    })
+  %>
+<% end %>

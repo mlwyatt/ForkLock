@@ -1,0 +1,40 @@
+<section class="hero is-fullheight is-success">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h2 class="title is-2">Session Ready!</h2>
+
+      <div class="box has-background-white-ter mb-5" style="max-width: 400px; margin: 0 auto;">
+        <p class="is-size-7 has-text-grey mb-2">Share this code with your group:</p>
+        <p class="title is-1 has-text-primary mb-0" style="letter-spacing: 0.3em;">
+          <%= @voting_session.code %>
+        </p>
+        <button class="button is-small is-ghost mt-2"
+                data-controller="clipboard"
+                data-clipboard-text-value="<%= @voting_session.code %>"
+                data-action="clipboard#copy">
+          <span class="icon"><i class="fas fa-copy"></i></span>
+          <span>Copy</span>
+        </button>
+      </div>
+
+      <div class="box" style="max-width: 400px; margin: 0 auto;">
+        <p class="is-size-6 has-text-grey mb-3">People in this session:</p>
+        <div id="participants-list" class="tags is-centered">
+          <% @participants.each do |participant| %>
+            <span class="tag is-medium is-primary participant-tag">
+              <%= participant.name %>
+              <% if participant == current_participant %>
+                <span class="ml-1">(you)</span>
+              <% end %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+
+      <%= link_to(swipe_session_path(@voting_session.code), class: 'button is-large is-warning is-rounded mt-5') do %>
+        <span class="icon"><i class="fas fa-play"></i></span>
+        <span>Start Swiping</span>
+      <% end %>
+    </div>
+  </div>
+</section>

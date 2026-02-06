@@ -3,7 +3,6 @@
 // Run that command whenever you add a new controller or create them with ./bin/rails generate stimulus controllerName
 
 import { application } from './application';
-import { callLogCallbacks } from '@common/is_local';
 
 // https://youtu.be/qOptalp8zUY?t=362
 import jsControllers from './**/*_controller.js';
@@ -20,5 +19,3 @@ tsControllers.forEach((controller) => {
 
   application.register(name, controller.module.default);
 });
-
-callLogCallbacks();

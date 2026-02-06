@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrubMatch - Find Food Together</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Home Screen -->
+    <section id="home-screen" class="screen hero is-fullheight is-primary">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title is-1 mb-2">
+            <i class="fas fa-utensils"></i> GrubMatch
+          </h1>
+          <p class="subtitle is-4 mb-6">Swipe together. Eat together.</p>
+          
+          <div class="buttons is-centered is-flex-direction-column">
+            <button class="button is-large is-warning is-rounded" data-action="create-session">
+              <span class="icon"><i class="fas fa-plus"></i></span>
+              <span>Start New Session</span>
+            </button>
+            <button class="button is-large is-light is-rounded" data-action="show-join">
+              <span class="icon"><i class="fas fa-users"></i></span>
+              <span>Join Session</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Join Screen -->
+    <section id="join-screen" class="screen hero is-fullheight is-info" style="display: none;">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h2 class="title is-2 mb-6">Join a Session</h2>
+          
+          <div class="field">
+            <div class="control has-icons-left">
+              <input id="join-code-input" class="input is-large has-text-centered" type="text" 
+                     placeholder="Enter 4-letter code" maxlength="4" style="text-transform: uppercase; letter-spacing: 0.5em; max-width: 300px; margin: 0 auto;">
+              <span class="icon is-left"><i class="fas fa-key"></i></span>
+            </div>
+          </div>
+          
+          <div class="field mt-4">
+            <div class="control">
+              <input id="join-name-input" class="input is-large has-text-centered" type="text" 
+                     placeholder="Your name" maxlength="20" style="max-width: 300px; margin: 0 auto;">
+            </div>
+          </div>
+          
+          <div class="buttons is-centered mt-5">
+            <button class="button is-large is-warning is-rounded" data-action="join-session">
+              <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+              <span>Join</span>
+            </button>
+            <button class="button is-large is-light is-rounded" data-action="go-home">
+              <span>Back</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lobby Screen -->
+    <section id="lobby-screen" class="screen hero is-fullheight is-success" style="display: none;">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h2 class="title is-2">Session Ready!</h2>
+          
+          <div class="box has-background-white-ter mb-5" style="max-width: 400px; margin: 0 auto;">
+            <p class="is-size-7 has-text-grey mb-2">Share this code with your group:</p>
+            <p id="session-code-display" class="title is-1 has-text-primary mb-0" style="letter-spacing: 0.3em;"></p>
+            <button class="button is-small is-ghost mt-2" data-action="copy-code">
+              <span class="icon"><i class="fas fa-copy"></i></span>
+              <span>Copy</span>
+            </button>
+          </div>
+          
+          <div class="box" style="max-width: 400px; margin: 0 auto;">
+            <p class="is-size-6 has-text-grey mb-3">People in this session:</p>
+            <div id="participants-list" class="tags is-centered"></div>
+          </div>
+          
+          <button class="button is-large is-warning is-rounded mt-5" data-action="start-swiping">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span>Start Swiping</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Swipe Screen -->
+    <section id="swipe-screen" class="screen" style="display: none;">
+      <nav class="navbar is-primary">
+        <div class="navbar-brand">
+          <span class="navbar-item">
+            <i class="fas fa-utensils mr-2"></i> GrubMatch
+          </span>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <span id="swipe-progress" class="tag is-warning is-medium">0 / 0</span>
+          </div>
+          <div class="navbar-item">
+            <button class="button is-small is-light" data-action="show-results">
+              <span class="icon"><i class="fas fa-chart-bar"></i></span>
+              <span>Results</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="swipe-container">
+        <div id="card-stack" class="card-stack">
+          <!-- Cards inserted dynamically -->
+        </div>
+
+        <div id="swipe-complete" class="has-text-centered" style="display: none;">
+          <div class="box">
+            <span class="icon is-large has-text-success">
+              <i class="fas fa-check-circle fa-3x"></i>
+            </span>
+            <h3 class="title is-4 mt-4">All Done!</h3>
+            <p class="subtitle is-6">You've swiped through all restaurants.</p>
+            <button class="button is-primary is-medium mt-4" data-action="show-results">
+              <span class="icon"><i class="fas fa-trophy"></i></span>
+              <span>See Group Results</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="swipe-actions">
+        <button class="button is-large is-danger is-rounded swipe-btn" data-action="swipe-left">
+          <span class="icon is-medium"><i class="fas fa-times fa-lg"></i></span>
+        </button>
+        <button class="button is-large is-success is-rounded swipe-btn" data-action="swipe-right">
+          <span class="icon is-medium"><i class="fas fa-heart fa-lg"></i></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Results Screen -->
+    <section id="results-screen" class="screen" style="display: none;">
+      <nav class="navbar is-primary">
+        <div class="navbar-brand">
+          <span class="navbar-item">
+            <i class="fas fa-trophy mr-2"></i> Results
+          </span>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <button class="button is-small is-light" data-action="back-to-swipe">
+              <span class="icon"><i class="fas fa-arrow-left"></i></span>
+              <span>Back</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="section">
+        <div class="container" style="max-width: 600px;">
+          <div id="waiting-message" class="notification is-warning" style="display: none;">
+            <p><i class="fas fa-hourglass-half mr-2"></i> Waiting for others to finish swiping...</p>
+            <div id="waiting-participants" class="mt-2"></div>
+          </div>
+
+          <div id="results-list">
+            <!-- Results inserted dynamically -->
+          </div>
+
+          <div class="has-text-centered mt-6">
+            <button class="button is-primary is-medium" data-action="new-session">
+              <span class="icon"><i class="fas fa-redo"></i></span>
+              <span>Start New Session</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

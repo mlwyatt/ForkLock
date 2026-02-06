@@ -1,0 +1,83 @@
+<section class="results-screen">
+  <nav class="navbar is-primary" style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="navbar-item">
+      <%= link_to(swipe_session_path(@voting_session.code), class: 'button is-small is-light') do %>
+        <span class="icon"><i class="fas fa-arrow-left"></i></span>
+        <span>Back</span>
+      <% end %>
+    </div>
+    <div class="navbar-item">
+      <i class="fas fa-trophy mr-2"></i> Results
+    </div>
+    <div class="navbar-item" style="visibility: hidden;">
+      <span class="button is-small">Back</span>
+    </div>
+  </nav>
+
+  <div class="section">
+    <div class="container" style="max-width: 600px;">
+
+      <% if @pending_participants.any? %>
+        <div class="notification is-warning">
+          <p>
+            <i class="fas fa-hourglass-half mr-2"></i>
+            Waiting for others to finish swiping...
+          </p>
+          <div class="mt-2">
+            <% @pending_participants.each do |p| %>
+              <span class="tag is-light mr-1"><%= p.name %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <div id="results-list">
+        <% @results.each_with_index do |result, index| %>
+          <% is_winner = index == 0 && result[:yes_votes] > 0 %>
+          <div class="result-card <%= 'winner' if is_winner %>">
+            <% if is_winner %>
+              <div class="winner-badge">
+                <i class="fas fa-crown"></i>
+              </div>
+            <% end %>
+
+            <div class="result-rank"><%= index + 1 %></div>
+
+            <%= image_tag(result[:restaurant].image_url,
+                          class: 'result-image',
+                          alt: result[:restaurant].name) %>
+
+            <div class="result-info">
+              <h4><%= result[:restaurant].name %></h4>
+              <p class="cuisine">
+                <%= result[:restaurant].cuisine %> &middot;
+                <%= result[:restaurant].price_display %> &middot;
+                <%= result[:restaurant].distance %>
+              </p>
+              <div class="vote-avatars">
+                <% result[:voters].select { |v| v[:liked] }.each do |vote| %>
+                  <div class="vote-avatar" title="<%= vote[:participant].name %>">
+                    <%= vote[:participant].name.first.upcase %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="result-votes">
+              <div class="count"><%= result[:yes_votes] %></div>
+              <div class="label">likes</div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="has-text-centered mt-6">
+        <%= link_to(root_path, class: 'button is-primary is-medium') do %>
+          <span class="icon"><i class="fas fa-redo"></i></span>
+          <span>Start New Session</span>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</section>

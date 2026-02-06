@@ -1,0 +1,26 @@
+<div class="restaurant-card"
+     data-swipe-target="card"
+     data-restaurant-id="<%= restaurant.id %>">
+  <div class="swipe-indicator nope" data-swipe-target="nopeIndicator">NOPE</div>
+  <div class="swipe-indicator like" data-swipe-target="likeIndicator">LIKE</div>
+
+  <div class="card-image-container">
+    <%= image_tag(restaurant.image_url, alt: restaurant.name, loading: 'lazy') %>
+    <div class="card-overlay">
+      <span class="cuisine-tag"><%= restaurant.cuisine %></span>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <h3 class="title is-4"><%= restaurant.name %></h3>
+    <div class="card-meta">
+      <span class="stars">
+        <%= restaurant.rating_stars %>
+        <span class="has-text-grey-light"><%= restaurant.rating %></span>
+      </span>
+      <span><%= restaurant.price_display %></span>
+      <span><i class="fas fa-walking"></i> <%= restaurant.distance %></span>
+    </div>
+    <p class="card-description"><%= restaurant.description %></p>
+  </div>
+</div>
