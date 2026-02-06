@@ -29,7 +29,6 @@
 - Prefix branches with `claude.` to indicate they came from you
 - Include short snake_case description followed by `.` and ticket number when applicable
   - `claude.fix_login_page.g1234` - GitHub issue #1234
-  - `claude.fix_login_page.Easy-1234` - YouTrack issue #Easy-1234
 
 ## Commit Messages
 
@@ -62,10 +61,9 @@
 ## Workflow
 
 1. Branch from `main`
-2. Develop and commit following [BrandsInsurance style guides](https://github.com/BrandsInsurance/expert-chainsaw#commit--code-style-guides)
-3. Run RuboCop and ESLint before committing
-4. Open PR to `main`
-5. After approval, squash and merge
+2. Run RuboCop and ESLint before committing
+3. Open PR to `main`
+4. After approval, squash and merge
 
 ## PR Comments
 
@@ -92,7 +90,7 @@ gh issue view 873 --json title,body,labels,state --jq '{title, body, labels: [.l
 - When updating a PR, don't use `gh pr edit`. Use `gh api` to avoid GraphQL deprecation error
 
 ```bash
-gh api repos/BrandsInsurance/eslint-plugin/pulls/39 -X PATCH -f body="##..."
+gh api repos/mlwyatt/sudoku/pulls/39 -X PATCH -f body="##..."
 ```
 
 ## PR Labels
