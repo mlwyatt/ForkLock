@@ -6,32 +6,34 @@
       <%= form_with(url: join_path, method: :post, local: true) do |form| %>
         <div class="field">
           <div class="control">
-            <%= form.text_field(:code,
-              class: 'input is-large has-text-centered',
-              placeholder: 'Enter 4-letter code',
-              maxlength: 4,
-              value: @code,
-              style: 'text-transform: uppercase; letter-spacing: 0.5em; max-width: 300px; margin: 0 auto;',
-              autocomplete: 'off'
-            ) %>
+            <%=
+              form.text_field(:code,
+                class: 'input is-large has-text-centered',
+                placeholder: "Enter #{Session::CODE_LENGTH}-digit code",
+                maxlength: Session::CODE_LENGTH,
+                value: @code,
+                style: 'text-transform: uppercase; letter-spacing: 0.5em; max-width: 300px; margin: 0 auto;',
+                autocomplete: 'off'
+              )
+            %>
           </div>
         </div>
 
         <div class="field mt-4">
           <div class="control">
-            <%= form.text_field(:name,
-              class: 'input is-large has-text-centered',
-              placeholder: 'Your name',
-              maxlength: 20,
-              style: 'max-width: 300px; margin: 0 auto;'
-            ) %>
+            <%=
+              form.text_field(:name,
+                class: 'input is-large has-text-centered',
+                placeholder: 'Your name',
+                maxlength: 20,
+                style: 'max-width: 300px; margin: 0 auto;'
+              )
+            %>
           </div>
         </div>
 
         <div class="buttons is-centered mt-5">
-          <%= form.submit('Join',
-            class: 'button is-large is-warning is-rounded'
-          ) %>
+          <%= form.submit('Join', class: 'button is-large is-warning is-rounded') %>
           <%= link_to(root_path, class: 'button is-large is-light is-rounded') do %>
             <span>Back</span>
           <% end %>
