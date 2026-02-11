@@ -15,6 +15,13 @@
           <span class="icon"><i class="fas fa-copy"></i></span>
           <span>Copy</span>
         </button>
+        <button class="button is-small is-ghost mt-2"
+                data-controller="clipboard"
+                data-clipboard-text-value="<%= join_with_code_url(@voting_session.code) %>"
+                data-action="clipboard#copy">
+          <span class="icon"><i class="fas fa-share"></i></span>
+          <span>Share</span>
+        </button>
       </div>
 
       <div class="box" style="max-width: 400px; margin: 0 auto;">
